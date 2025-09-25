@@ -12,45 +12,62 @@ namespace Cainos.PixelArtTopDown_Basic
     {
         public float speed;
 
-        private Animator animator;
-        InputAction moveAction;
-        private InputAction attackAction;
-
-        private Rigidbody2D rigidBody;
+        private Animator _animator;
+        private InputAction _moveAction;
+        private InputAction _attackAction;
+        private Rigidbody2D _rigidBody;
         public GameObject projectile;
+        
+        [SerializeField] private float attackCooldownSeconds = 0.35f;
+        private bool _canShoot = true;
+        private float _nextAllowedAttackTime = 0f;
+        
+        
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
-            moveAction = InputSystem.actions.FindAction("Move");
-            moveAction.Enable();
-            attackAction = InputSystem.actions.FindAction("Attack");
-            attackAction.Enable();
-            rigidBody = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+            _moveAction = InputSystem.actions.FindAction("Move");
+            _moveAction.Enable();
+            _attackAction = InputSystem.actions.FindAction("DirectionalAttack");
+            _attackAction.Enable();
+            _rigidBody = GetComponent<Rigidbody2D>();
+        }
+        
+        IEnumerator AttackCooldown()
+        {
+            yield return new WaitForSeconds(0.5f);
+            _canShoot = true;
         }
 
 
         private void Update()
         {
             Vector2 dir = Vector2.zero;
-            Vector2 moveValue = moveAction.ReadValue<Vector2>();
-            float attackValue = attackAction.ReadValue<float>();
+            Vector2 moveValue = _moveAction.ReadValue<Vector2>();
+            Vector2 attackValue = _attackAction.ReadValue<Vector2>();
             
             dir.x = moveValue.x;
             dir.y = moveValue.y;
             dir.Normalize();
-            animator.SetBool("IsMoving", dir.magnitude > 0);
+            _animator.SetBool("IsMoving", dir.magnitude > 0);
             
-            
-            if (Mathf.Approximately(attackValue, 1.0f) && attackAction.WasPressedThisFrame())
+            if (
+                Mathf.Approximately(attackValue.magnitude, 1.0f) &&
+                _attackAction.WasPressedThisFrame() &&
+                _canShoot
+                )
             {
-                GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity );
-                projectileInstance.GetComponent<ProjectileController>().SetDirection(new Vector2(5.0f,0.0f));
-                //projectile.GetComponent<ProjectileController>().SetDirection(new Vector2(0.0f, 5.0f));
-                //projectile.GetComponent<ProjectileController>().SetDirection(new Vector2(0.0f, 5.0f));
+                _canShoot = false;
+                
+                Vector3 spawnOffset = Vector2.up * 0.5f + attackValue * 1.2f;
+                GameObject projectileInstance = Instantiate(projectile, transform.position + spawnOffset, Quaternion.identity );
+                projectileInstance.GetComponent<ProjectileController>().SetDirection(attackValue);
+                
+                StartCoroutine(AttackCooldown());
             }
             
-            rigidBody.linearVelocity = speed * dir;
+            _rigidBody.linearVelocity = speed * dir;
         }
     }
 }
