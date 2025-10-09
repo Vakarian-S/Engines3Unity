@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5628018141983903106}
   - component: {fileID: 2475309810659341776}
+  - component: {fileID: 8885005455098010935}
   - component: {fileID: 5628018141983903107}
   - component: {fileID: 5628018141983903116}
   - component: {fileID: 5628018141983903117}
@@ -48,6 +49,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2e4cb327401d140abffb81ccebf556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySlimeController
+--- !u!114 &8885005455098010935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5628018141983903104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53eb6bb482ff75740a94a2486cc1825e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maximumHitPoints: 10
+  currentHitPoints: 0
+  hitTriggerName: Hit
+  flashMaterial: {fileID: 2100000, guid: b3e190ee131e3884997d9103ebf58574, type: 2}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  singleFlashDurationSeconds: 0.08
+  numberOfFlashes: 1
 --- !u!212 &5628018141983903107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141,7 +161,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.07}
+  m_Offset: {x: -0.01, y: -0.07}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,7 +171,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.28, y: 0.22}
+  m_Size: {x: 0.16, y: 0.18}
   m_EdgeRadius: 0
 --- !u!50 &5628018141983903117
 Rigidbody2D:
