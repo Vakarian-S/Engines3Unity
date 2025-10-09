@@ -17,7 +17,10 @@ namespace Cainos.PixelArtTopDown_Basic
         private InputAction _attackAction;
         private Rigidbody2D _rigidBody;
         public GameObject projectile;
-        
+        public GameObject bomb;
+        public int numberOfBombs = 1;
+
+
         [SerializeField] private float attackCooldownSeconds = 0.35f;
         private bool _canShoot = true;
         
@@ -39,7 +42,9 @@ namespace Cainos.PixelArtTopDown_Basic
             _canShoot = true;
         }
 
-
+        private void SpawnObject(GameObject Spawn_Object = null){
+          GameObject newGameObject = Instantiate(Spawn_Object, transform.position, transform.rotation);
+        }
         private void Update()
         {
             Vector2 dir = Vector2.zero;
@@ -67,6 +72,13 @@ namespace Cainos.PixelArtTopDown_Basic
             }
             
             _rigidBody.linearVelocity = speed * dir;
+        
+            if(Input.GetKeyDown(KeyCode.B) && numberOfBombs > 0)
+            {
+                SpawnObject(bomb);
+                numberOfBombs -= 1;
+            }
+
         }
     }
 }
