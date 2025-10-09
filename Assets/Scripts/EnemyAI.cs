@@ -7,7 +7,8 @@ public class EnemyAI : MonoBehaviour
     public float Speed = 3.0f;
     public float FollowDistance = 2.0f;
     public float DetectionRange = 5.0f;
-    public GameObject NewEnemy;
+    //public GameObject NewEnemy;
+    private bool HasSpawned = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,9 +30,16 @@ public class EnemyAI : MonoBehaviour
             float distance = direction.magnitude;
             if (distance <= DetectionRange)
             {
+                //if (HasSpawned == false)
+                //{
+                //    HasSpawned = true;
+                //    GameObject NewEnemySummon = Instantiate(NewEnemy, transform.position, transform.rotation);
+                //}
 
-                GameObject NewEnemySummon = Instantiate(NewEnemy, transform.position, transform.rotation);
+                if (distance > FollowDistance)
+
                 if (distance > FollowDistance)  
+
                 {
                     //Normalizes the direction vector and transforms the enemies position to the players
                     direction.Normalize();
