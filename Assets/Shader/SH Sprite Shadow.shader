@@ -3,7 +3,7 @@ Shader "Cainos/Pixel Art Top Down - Basic/Sprite Default - Shadow"
 	Properties
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-		_Color ("Tint", Color) = (1,1,1,1)
+		_Color ("Tint", Color) = (1,0,0,1)
 
 		[IntRange] _StencilRef("Stencil Ref Value", Range(0,255)) = 0
 
