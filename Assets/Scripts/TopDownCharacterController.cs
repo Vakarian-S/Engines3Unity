@@ -41,7 +41,13 @@ namespace Cainos.PixelArtTopDown_Basic
             yield return new WaitForSeconds(0.5f);
             _canShoot = true;
         }
+        
+        public void AddBomb()
+        {
 
+            numberOfBombs += 1;
+
+        }
         private void SpawnObject(GameObject Spawn_Object = null){
           GameObject newGameObject = Instantiate(Spawn_Object, transform.position, transform.rotation);
         }
