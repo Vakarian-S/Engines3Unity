@@ -10,6 +10,8 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private int damageAmount = 1;
     [SerializeField] private bool destroyOnAnyHit = true;
     [SerializeField] private GameObject hitEffectPrefab; // 👈 assign this in the inspector
+    
+    [SerializeField] private GameObject spawnSoundObject;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,6 +40,7 @@ public class ProjectileController : MonoBehaviour
     {
         _rigidBody.linearVelocity = _direction * Velocity;
         transform.right = _direction;
+        Instantiate(spawnSoundObject, transform.position, Quaternion.identity);
         StartCoroutine(CountTo10());
     }
 
