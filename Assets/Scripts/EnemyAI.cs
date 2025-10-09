@@ -31,7 +31,11 @@ public class EnemyAI : MonoBehaviour
             {
 
                 GameObject NewEnemySummon = Instantiate(NewEnemy, transform.position, transform.rotation);
+<<<<<<< HEAD
                 if (distance > FollowDistance)
+=======
+                if (distance > FollowDistance)  
+>>>>>>> master
                 {
                     //Normalizes the direction vector and transforms the enemies position to the players
                     direction.Normalize();
