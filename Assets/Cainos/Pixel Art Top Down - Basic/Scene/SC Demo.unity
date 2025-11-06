@@ -13976,6 +13976,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 663024786}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &669978870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5628018141983903119, guid: ef67ba864d1ecc042b5f4cf48455c0a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1655658906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd146093740c5d43b5909c7913f3109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &677148539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30910,6 +30922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1718354715}
   - component: {fileID: 1718354714}
+  - component: {fileID: 1718354716}
   m_Layer: 5
   m_Name: InGameHUD
   m_TagString: Untagged
@@ -30956,6 +30969,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718354716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718354713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6602bde40794f40aed7a5ec2cd9f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGameHUDController
+  uiDocument: {fileID: 0}
+  bombIconSprite: {fileID: -4003982261762975687, guid: 03271773b3f062e409b6b4fcf5774d32,
+    type: 3}
+  mainPlayerCharacter: {fileID: 669978870}
 --- !u!1001 &1728359092
 PrefabInstance:
   m_ObjectHideFlags: 0
