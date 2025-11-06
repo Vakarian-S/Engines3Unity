@@ -1,0 +1,7 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ui="UnityEditor.UIElements" class="hud-root" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/InGameUI.uss?fileID=7433441132597879392&amp;guid=621a717650e8f8644967bd81c6073b25&amp;type=3#InGameUI" />
+    <VisualElement name="BombHUDRoot" class="bomb-hud-root" style="width: auto;">
+        <Image name="BombIcon" class="bomb-icon" />
+        <Label name="BombCountLabel" text="0" class="bomb-count" />
+    </VisualElement>
+</UXML>

@@ -1,0 +1,29 @@
+.hud-root {
+    padding: 32px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bomb-hud-root {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 8px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.bomb-icon {
+    width: 75px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+.bomb-count {
+    color: white;
+    -unity-font-definition: var(--unity-default-font);
+    font-size: 24px;
+    unity-font-style: bold;
+}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,7 @@ namespace Cainos.PixelArtTopDown_Basic
         private InputAction _moveAction;
         private InputAction _attackAction;
         private Rigidbody2D _rigidBody;
+        public event Action<int> OnBombCountChanged;
         public GameObject projectile;
         public GameObject bomb;
         public int numberOfBombs = 1;
@@ -44,10 +46,10 @@ namespace Cainos.PixelArtTopDown_Basic
         
         public void AddBomb()
         {
-
             numberOfBombs += 1;
+            OnBombCountChanged?.Invoke(numberOfBombs);
+        }
 
-        }
         private void SpawnObject(GameObject Spawn_Object = null){
           GameObject newGameObject = Instantiate(Spawn_Object, transform.position, transform.rotation);
         }
@@ -83,6 +85,7 @@ namespace Cainos.PixelArtTopDown_Basic
             {
                 SpawnObject(bomb);
                 numberOfBombs -= 1;
+                OnBombCountChanged?.Invoke(numberOfBombs);
             }
 
         }
