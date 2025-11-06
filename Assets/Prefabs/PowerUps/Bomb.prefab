@@ -105,3 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   BOOM: {fileID: 4463203874002739248, guid: 257a083352792914598c3ad347c4bebb, type: 3}
+  explodeAfterSeconds: 3
+  radius: 500
+  damage: 500
+  explosionForce: 500
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
