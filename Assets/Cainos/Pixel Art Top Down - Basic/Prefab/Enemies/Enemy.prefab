@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: -105541197
   m_SortingLayer: 3
   m_SortingOrder: 200
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
+  m_Sprite: {fileID: -594301437617618152, guid: 003378ce909090046880482402de658b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,6 +110,8 @@ MonoBehaviour:
   Speed: 3
   FollowDistance: 2
   DetectionRange: 5
+  bomb: {fileID: 0}
+  numberOfBombs: 1
 --- !u!50 &847847491693474794
 Rigidbody2D:
   serializedVersion: 5
