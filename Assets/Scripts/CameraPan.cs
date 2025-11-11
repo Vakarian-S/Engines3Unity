@@ -34,7 +34,7 @@ public class CameraPan : MonoBehaviour
 
         if (pulseEffect)
         {
-            float scale = 1.2f + Mathf.Sin(Time.time * scaleSpeed) * scaleAmount;
+            float scale = 1.4f + Mathf.Sin(Time.time * scaleSpeed) * scaleAmount;
             rectTransform.localScale = new Vector3(scale, scale, 1f);
         }
     }

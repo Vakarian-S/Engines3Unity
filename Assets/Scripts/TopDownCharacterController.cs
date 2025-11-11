@@ -88,6 +88,11 @@ namespace Cainos.PixelArtTopDown_Basic
                 OnBombCountChanged?.Invoke(numberOfBombs);
             }
 
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
         }
     }
 }

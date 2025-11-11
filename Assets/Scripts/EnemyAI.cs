@@ -1,5 +1,5 @@
 using System.Collections;
-using UnityEditor.ShaderGraph.Internal;
+//using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -16,7 +16,17 @@ public class EnemyAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SommonAC130Strike());
+        if (Player != null)
+        {
+            Vector2 direction = Player.position - transform.position;
+            float distance = direction.magnitude;
+            if (distance <= DetectionRange)
+            {
+                StartCoroutine(SommonAC130Strike());
+            }
+        }
+
+       
 
     }
 
