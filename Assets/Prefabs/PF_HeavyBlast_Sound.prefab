@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5542613212364657220}
   - component: {fileID: 4929835201276012302}
   m_Layer: 20
-  m_Name: PF_BaseProjectile_Sound
+  m_Name: PF_HeavyBlast_Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 18d6a007b013c9d4ebf7f7c44e1e5f06, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

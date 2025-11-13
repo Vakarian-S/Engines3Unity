@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5542613212364657220}
   m_Layer: 20
   m_Name: PF_BaseProjectile_Hit
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

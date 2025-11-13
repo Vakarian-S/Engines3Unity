@@ -127,3 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8405c04de8a284b9f8d47957f48cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  spawnSoundObject: {fileID: 5628018141983903104, guid: 70af01babe0b86f46bb33e05f1442dad,
+    type: 3}

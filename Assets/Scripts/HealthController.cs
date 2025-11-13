@@ -52,7 +52,7 @@ public class Health : MonoBehaviour, IDamageable
         }
         else
         {
-            if (_animator == null || string.IsNullOrEmpty(hitTriggerName)) return;
+            if (!_animator || string.IsNullOrEmpty(hitTriggerName)) return;
 
             _animator.ResetTrigger(hitTriggerName);
             _animator.SetTrigger(hitTriggerName);
