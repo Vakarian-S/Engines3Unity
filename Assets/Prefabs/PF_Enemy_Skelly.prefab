@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5628018141983903106}
   - component: {fileID: -3795910667157087826}
-  - component: {fileID: 2475309810659341776}
   - component: {fileID: 8568172253284785513}
   - component: {fileID: 8885005455098010935}
   - component: {fileID: 5628018141983903107}
@@ -55,18 +54,7 @@ MonoBehaviour:
   detectionRadius: 8
   movementSpeed: 3
   playerTransform: {fileID: 0}
---- !u!114 &2475309810659341776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5628018141983903104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2e4cb327401d140abffb81ccebf556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySlimeController
+  patrollingController: {fileID: 0}
 --- !u!114 &8568172253284785513
 MonoBehaviour:
   m_ObjectHideFlags: 0

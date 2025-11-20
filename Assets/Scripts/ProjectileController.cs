@@ -9,8 +9,8 @@ public class ProjectileController : MonoBehaviour
     private const float Velocity = 5.0f;
     [SerializeField] private int damageAmount = 1;
     [SerializeField] private bool destroyOnAnyHit = true;
-    [SerializeField] private GameObject hitEffectPrefab; // 👈 assign this in the inspector
-    
+    [SerializeField] private GameObject hitEffectPrefab;
+
     [SerializeField] private GameObject spawnSoundObject;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,19 +21,24 @@ public class ProjectileController : MonoBehaviour
         if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(damageAmount);
-            if (destroyOnAnyHit)
-            {
-                Destroy(gameObject);
-                SpawnHitEffect();
-            }
+            if (!destroyOnAnyHit) return;
+            Destroy(gameObject);
+            SpawnHitEffect();
 
             return;
+        }
+
+        var pushable = collision.GetComponent<IPushable>();
+        if (pushable != null)
+        {
+            // Calculate push direction away from the projectile
+            Vector2 direction = (collision.transform.position - transform.position).normalized;
+            pushable.TakeForce(direction);
         }
 
         if (!destroyOnAnyHit) return;
         Destroy(gameObject);
         SpawnHitEffect();
-
     }
 
     private void Start()
@@ -59,12 +64,11 @@ public class ProjectileController : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
     }
-    
-    
+
+
     private void SpawnHitEffect()
     {
         if (hitEffectPrefab == null) return;
         Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
     }
-    
 }

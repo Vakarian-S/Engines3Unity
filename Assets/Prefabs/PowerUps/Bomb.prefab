@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6361062810107345751}
   - component: {fileID: 8283337607964565384}
   - component: {fileID: 7941586758333859038}
+  - component: {fileID: 3038233957232369}
+  - component: {fileID: 7483075928212196406}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -105,10 +107,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   BOOM: {fileID: 4463203874002739248, guid: 257a083352792914598c3ad347c4bebb, type: 3}
+  bombSpriteRenderer: {fileID: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  tickColor: {r: 1, g: 0, b: 0, a: 1}
+  tickingSpeed: 4
+  rigidbody2DComponent: {fileID: 0}
   explodeAfterSeconds: 3
-  radius: 5
+  radius: 3
   damage: 10
   explosionForce: 10
   affectedLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!50 &3038233957232369
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739955223980805561}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 10
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 2443cb48cb6977c4993cda944cea2965, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &7483075928212196406
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739955223980805561}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 2443cb48cb6977c4993cda944cea2965, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 16.72, y: 4.6}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 16.72, y: 4.6}
+  m_EdgeRadius: 0
