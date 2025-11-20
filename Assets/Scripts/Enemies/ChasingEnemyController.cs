@@ -6,19 +6,21 @@ public class ChasingEnemyController : MonoBehaviour
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private Transform playerTransform;
-    
-    
+
+    [Header("Patrol Controller")] [SerializeField]
+    private PatrollingController patrollingController;
+
+
     private bool _isChasingPlayer;
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        
+
         if (playerTransform != null) return;
         var playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
@@ -29,6 +31,11 @@ public class ChasingEnemyController : MonoBehaviour
         {
             Debug.LogWarning("SkeletonChaseController: No player with tag 'Player' found in the scene.");
         }
+
+        // Auto-find a patrolling controller if not assigned
+        if (patrollingController != null) return;
+        Debug.Log("Havent found the controller");
+        patrollingController = GetComponent<PatrollingController>();
     }
 
     private void Update()
@@ -39,16 +46,24 @@ public class ChasingEnemyController : MonoBehaviour
         }
 
         var distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
+        Debug.Log("Distance to player is " + distanceToPlayer);
         _isChasingPlayer = distanceToPlayer <= detectionRadius;
 
         if (_isChasingPlayer)
         {
+            patrollingController?.StopPatrolling();
             ChasePlayer();
         }
         else
         {
-            StopChasing();
+            if (patrollingController)
+            {
+                patrollingController?.StartPatrolling();
+            }
+            else
+            {
+                StopChasing();
+            }
         }
     }
 
