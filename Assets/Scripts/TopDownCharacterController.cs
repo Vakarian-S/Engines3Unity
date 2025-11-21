@@ -25,11 +25,12 @@ namespace Cainos.PixelArtTopDown_Basic
 
         [SerializeField] private float attackCooldownSeconds = 0.35f;
         private bool _canShoot = true;
-        
-        
+
+
 
         private void Start()
         {
+
             _animator = GetComponent<Animator>();
             _moveAction = InputSystem.actions.FindAction("Move");
             _moveAction.Enable();
@@ -37,62 +38,66 @@ namespace Cainos.PixelArtTopDown_Basic
             _attackAction.Enable();
             _rigidBody = GetComponent<Rigidbody2D>();
         }
-        
+
         IEnumerator AttackCooldown()
         {
             yield return new WaitForSeconds(0.5f);
             _canShoot = true;
         }
-        
+
         public void AddBomb()
         {
             numberOfBombs += 1;
             OnBombCountChanged?.Invoke(numberOfBombs);
         }
 
-        private void SpawnObject(GameObject Spawn_Object = null){
-          GameObject newGameObject = Instantiate(Spawn_Object, transform.position, transform.rotation);
+        private void SpawnObject(GameObject Spawn_Object = null)
+        {
+            GameObject newGameObject = Instantiate(Spawn_Object, transform.position, transform.rotation);
         }
         private void Update()
         {
-            Vector2 dir = Vector2.zero;
-            Vector2 moveValue = _moveAction.ReadValue<Vector2>();
-            Vector2 attackValue = _attackAction.ReadValue<Vector2>();
-            
-            dir.x = moveValue.x;
-            dir.y = moveValue.y;
-            dir.Normalize();
-            _animator.SetBool("IsMoving", dir.magnitude > 0);
-            
-            if (
-                Mathf.Approximately(attackValue.magnitude, 1.0f) &&
-                _attackAction.WasPressedThisFrame() &&
-                _canShoot
-                )
+            if (!PauseMenu.isPaused)
             {
-                _canShoot = false;
-                
-                Vector3 spawnOffset = Vector2.up * 0.5f + attackValue * 1.2f;
-                GameObject projectileInstance = Instantiate(projectile, transform.position + spawnOffset, Quaternion.identity );
-                projectileInstance.GetComponent<ProjectileController>().SetDirection(attackValue);
-                
-                StartCoroutine(AttackCooldown());
-            }
-            
-            _rigidBody.linearVelocity = speed * dir;
-        
-            if(Input.GetKeyDown(KeyCode.B) && numberOfBombs > 0)
-            {
-                SpawnObject(bomb);
-                numberOfBombs -= 1;
-                OnBombCountChanged?.Invoke(numberOfBombs);
-            }
+                Vector2 dir = Vector2.zero;
+                Vector2 moveValue = _moveAction.ReadValue<Vector2>();
+                Vector2 attackValue = _attackAction.ReadValue<Vector2>();
 
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
+                dir.x = moveValue.x;
+                dir.y = moveValue.y;
+                dir.Normalize();
+                _animator.SetBool("IsMoving", dir.magnitude > 0);
 
+                if (
+                    Mathf.Approximately(attackValue.magnitude, 1.0f) &&
+                    _attackAction.WasPressedThisFrame() &&
+                    _canShoot
+                    )
+                {
+                    _canShoot = false;
+
+                    Vector3 spawnOffset = Vector2.up * 0.5f + attackValue * 1.2f;
+                    GameObject projectileInstance = Instantiate(projectile, transform.position + spawnOffset, Quaternion.identity);
+                    projectileInstance.GetComponent<ProjectileController>().SetDirection(attackValue);
+
+                    StartCoroutine(AttackCooldown());
+                }
+
+                _rigidBody.linearVelocity = speed * dir;
+
+                if (Input.GetKeyDown(KeyCode.B) && numberOfBombs > 0)
+                {
+                    SpawnObject(bomb);
+                    numberOfBombs -= 1;
+                    OnBombCountChanged?.Invoke(numberOfBombs);
+                }
+
+                if (Input.GetKey(KeyCode.Escape))
+                {
+                    Application.Quit();
+                }
+
+            }
         }
     }
 }
