@@ -159,4 +159,12 @@ public class ShooterEnemyController : MonoBehaviour
             Destroy(bulletInstance, bulletLifeTime);
         }
     }
+    
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize detection radius in the editor
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+    
 }
