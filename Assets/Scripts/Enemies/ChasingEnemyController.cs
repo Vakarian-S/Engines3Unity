@@ -46,7 +46,6 @@ public class ChasingEnemyController : MonoBehaviour
         }
 
         var distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        Debug.Log("Distance to player is " + distanceToPlayer);
         _isChasingPlayer = distanceToPlayer <= detectionRadius;
 
         if (_isChasingPlayer)

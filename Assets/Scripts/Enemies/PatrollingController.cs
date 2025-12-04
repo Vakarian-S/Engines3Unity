@@ -55,15 +55,11 @@ public class PatrollingController : MonoBehaviour
 
     private void MoveTowardsCurrentPatrolPoint()
     {
-        Debug.Log("I move to the point");
-        Debug.Log(patrolPoints[currentPatrolPointIndex].position.ToString());
         var targetPatrolPoint = patrolPoints[currentPatrolPointIndex];
         var currentPosition = _rigidbody2D.position;
         Vector2 targetPosition = targetPatrolPoint.position;
 
         Vector2 directionToPoint = (targetPatrolPoint.position - transform.position).normalized;
-        Debug.Log("My new Velocity is");
-        Debug.Log(_rigidbody2D.linearVelocity.ToString());
         _rigidbody2D.linearVelocity = directionToPoint * movementSpeed;
 
         if (directionToPoint.x != 0)

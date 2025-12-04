@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
@@ -10,21 +11,24 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private int damageAmount = 1;
     [SerializeField] private bool destroyOnAnyHit = true;
     [SerializeField] private GameObject hitEffectPrefab;
+    [SerializeField] private string targetTag;
+
 
     [SerializeField] private GameObject spawnSoundObject;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
+        Debug.Log(collision.gameObject.tag);
 
         // Try interface first
         if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
+            if (targetTag.NullIfEmpty() != null && !collision.gameObject.CompareTag(targetTag)) return;
             damageable.TakeDamage(damageAmount);
             if (!destroyOnAnyHit) return;
             Destroy(gameObject);
             SpawnHitEffect();
-
             return;
         }
 
@@ -58,6 +62,16 @@ public class ProjectileController : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         _direction = newDirection;
+    }
+
+    public void SetTargetTag(string newTargetTag)
+    {
+        targetTag = newTargetTag;
+    }
+
+    public void SetDestroyOnAnyHit(bool newDestroyOnAnyHit)
+    {
+        destroyOnAnyHit = newDestroyOnAnyHit;
     }
 
     private void Awake()

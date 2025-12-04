@@ -76,6 +76,7 @@ namespace Cainos.PixelArtTopDown_Basic
                 GameObject projectileInstance = Instantiate(projectile, transform.position + spawnOffset, Quaternion.identity );
                 projectileInstance.GetComponent<ProjectileController>().SetDirection(attackValue);
                 
+                
                 StartCoroutine(AttackCooldown());
             }
             
