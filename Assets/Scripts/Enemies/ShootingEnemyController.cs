@@ -22,6 +22,17 @@ public class ShooterEnemyController : MonoBehaviour
     [SerializeField] private float bulletLifeTime = 5f;
     [SerializeField] private bool shouldAimAtTarget = true;
 
+    [Header("Boss Phases")]
+    public Health bossHealth;
+    public float phaseTwoThreshold = 25f; 
+    private bool phase2Active = false;
+
+    [Header("Secondary Attack")]
+    public bool enableSecondaryAttack = true;
+    public float secondaryAttackInterval = 5f;
+    public GameObject secondaryAttackPrefab;
+    public Transform secondaryAttackPoint;
+
     private bool isShooting;
 
     private void Start()
@@ -36,6 +47,9 @@ public class ShooterEnemyController : MonoBehaviour
         }
 
         StartCoroutine(ShootingLoopCoroutine());
+        StartCoroutine(PhaseCheckLoop());
+
+
     }
 
     private IEnumerator ShootingLoopCoroutine()
@@ -166,5 +180,86 @@ public class ShooterEnemyController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
-    
+    private IEnumerator PhaseCheckLoop()
+    {
+        while (true)
+        {
+
+            // Activate Phase 2 once
+            if (!phase2Active && bossHealth.currentHitPoints <= phaseTwoThreshold)
+            {
+                phase2Active = true;
+                print("Phase2 Active!");
+                StartCoroutine(SecondaryAttackLoop());
+            }
+
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private IEnumerator SecondaryAttackLoop()
+    {
+        while (phase2Active)
+        {
+            if (IsTargetWithinRangeAndVisible())
+            {
+                PerformSecondaryAttack();
+            }
+
+            yield return new WaitForSeconds(secondaryAttackInterval);
+        }
+    }
+    private void PerformSecondaryAttack()
+    {
+        if (!secondaryAttackPrefab)
+        {
+            Debug.LogWarning("ShooterEnemyController has no secondaryPrefab assigned.", this);
+            return;
+        }
+
+        if (firePoints == null || firePoints.Length == 0)
+        {
+            Debug.LogWarning("ShooterEnemyController has no firePoints assigned.", this);
+            return;
+        }
+
+        foreach (Transform firePoint in firePoints)
+        {
+            if (firePoint == null)
+            {
+                continue;
+            }
+
+            Vector3 shootDirection;
+
+            if (shouldAimAtTarget && targetTransform != null)
+            {
+                shootDirection = (targetTransform.position - firePoint.position).normalized;
+
+                // Rotate the fire point or bullet so it visually faces the target (optional)
+                if (shootDirection != Vector3.zero)
+                {
+                    firePoint.rotation = Quaternion.LookRotation(shootDirection);
+                }
+            }
+            else
+            {
+                // Use whatever direction the firePoint is facing
+                shootDirection = firePoint.forward;
+            }
+
+            // Spawn bullet
+            GameObject arcAttack = Instantiate(
+                secondaryAttackPrefab,
+                firePoint.position,
+                Quaternion.LookRotation(shootDirection)
+            );
+            arcAttack.GetComponent<ProjectileController>().SetDirection(shootDirection);
+            arcAttack.GetComponent<ProjectileController>().SetTargetTag("Player");
+            arcAttack.GetComponent<ProjectileController>().SetDestroyOnAnyHit(false);
+
+            // Destroy after some time so we do not leak objects
+            Destroy(arcAttack, bulletLifeTime);
+        }
+    }
 }

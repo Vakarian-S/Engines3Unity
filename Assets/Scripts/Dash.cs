@@ -33,17 +33,12 @@ public class PlayerDash : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        
-        print(healthControl.isInvulnerable);
+        StartCoroutine(InvulnerabilityIFrames());
+
         float startTime = Time.time;
-        while (Time.time < startTime + dashInvulnerabilityDuration)
-        {
-            healthControl.isInvulnerable = true;
-
-        }
-        healthControl.isInvulnerable = false;
-
-        while (Time.time < startTime + dashDuration)
+        float totalDashTime = startTime + dashDuration;
+       
+        while (Time.time < totalDashTime)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
             yield return null;
@@ -56,9 +51,12 @@ public class PlayerDash : MonoBehaviour
         canDash = true;
     }
 
-    // Example method to check invulnerability
-    public bool IsInvulnerable()
+    System.Collections.IEnumerator InvulnerabilityIFrames()
     {
-        return healthControl.isInvulnerable;
+        healthControl.isInvulnerable = true;
+
+        yield return new WaitForSeconds(dashInvulnerabilityDuration);
+
+        healthControl.isInvulnerable = false;
     }
 }

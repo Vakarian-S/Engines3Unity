@@ -11,8 +11,8 @@ public class Health : MonoBehaviour, IDamageable
     private Material[] _originalSharedMaterials;
     
     [Header("Health Settings")]
-    [SerializeField] private int maximumHitPoints = 10;
-    [SerializeField] private int currentHitPoints;
+    [SerializeField] public int maximumHitPoints = 10;
+    [SerializeField] public int currentHitPoints;
     [SerializeField] private string hitTriggerName = "Hit";
     [SerializeField] public bool isInvulnerable = false;
 

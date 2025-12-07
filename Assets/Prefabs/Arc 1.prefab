@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7810623457092069758}
   - component: {fileID: 5200639469571349675}
   - component: {fileID: 4806780382308127080}
+  - component: {fileID: 9121260018224099024}
   m_Layer: 0
   m_Name: Arc 1
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 70.35737, y: 2.97176, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3970118203143891836}
@@ -73,13 +74,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e87c37d052621f418e141d84194950e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileController
-  damageAmount: 500
+  damageAmount: 5
   destroyOnAnyHit: 1
   hitEffectPrefab: {fileID: 5628018141983903104, guid: cb8b876d492ab184196b2f67a0c2e22f,
     type: 3}
   targetTag: 
   spawnSoundObject: {fileID: 5628018141983903104, guid: 3452b9032c2bc564baefc48119812c94,
     type: 3}
+--- !u!114 &9121260018224099024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860278370864477987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b666a6c4e6971459d4498c2131d719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArcScale
+  targetScale: {x: 0.8, y: 0.8, z: 1}
+  growTime: 0.6
 --- !u!1 &5459612878001817480
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 5459612878001817480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
