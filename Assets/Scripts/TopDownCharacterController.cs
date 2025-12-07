@@ -21,9 +21,9 @@ namespace Cainos.PixelArtTopDown_Basic
         public GameObject projectile;
         public GameObject bomb;
         public int numberOfBombs = 1;
-
-
-        [SerializeField] private float attackCooldownSeconds = 0.35f;
+        public float attackCD = 0.5f;
+        public bool hasAttackCooldownUpgrade = false;
+        //[SerializeField] private float attackCooldownSeconds = 0.35f;
         private bool _canShoot = true;
         
         
@@ -40,7 +40,7 @@ namespace Cainos.PixelArtTopDown_Basic
         
         IEnumerator AttackCooldown()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(attackCD);
             _canShoot = true;
         }
         

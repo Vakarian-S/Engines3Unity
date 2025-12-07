@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    public float dashSpeed = 10f;
-    public float dashDuration = 0.4f;
+    public float dashSpeed = 15f;
+    public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-
+    public float dashInvulnerabilityDuration = 0.1f;
     private bool isDashing = false;
     private bool canDash = true;
-    private bool isInvulnerable = false;
     private Rigidbody2D rb;
     private Vector2 dashDirection;
+
+    public Health healthControl;
 
     void Start()
     {
@@ -32,9 +33,16 @@ public class PlayerDash : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        isInvulnerable = true;
-
+        
+        print(healthControl.isInvulnerable);
         float startTime = Time.time;
+        while (Time.time < startTime + dashInvulnerabilityDuration)
+        {
+            healthControl.isInvulnerable = true;
+
+        }
+        healthControl.isInvulnerable = false;
+
         while (Time.time < startTime + dashDuration)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
@@ -43,7 +51,6 @@ public class PlayerDash : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         isDashing = false;
-        isInvulnerable = false;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
@@ -52,6 +59,6 @@ public class PlayerDash : MonoBehaviour
     // Example method to check invulnerability
     public bool IsInvulnerable()
     {
-        return isInvulnerable;
+        return healthControl.isInvulnerable;
     }
 }

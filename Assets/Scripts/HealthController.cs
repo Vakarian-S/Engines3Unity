@@ -14,7 +14,9 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private int maximumHitPoints = 10;
     [SerializeField] private int currentHitPoints;
     [SerializeField] private string hitTriggerName = "Hit";
-    
+    [SerializeField] public bool isInvulnerable = false;
+
+
     [Header("Flash Settings")]
     [SerializeField] private Material flashMaterial;  
     [SerializeField] private Color flashColor = Color.white;
@@ -22,6 +24,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField, Min(1)] private int numberOfFlashes = 1;
     
     
+
     public System.Action OnDeath;
     private void Awake()
     {
@@ -43,26 +46,29 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damageAmount)
     {
-        currentHitPoints -= Mathf.Max(0, damageAmount);
-
-        if (currentHitPoints <= 0)
+        if (!isInvulnerable)
         {
-            currentHitPoints = 0;
-            HandleDeath();
-        }
-        else
-        {
-            if (!_animator || string.IsNullOrEmpty(hitTriggerName)) return;
+            currentHitPoints -= Mathf.Max(0, damageAmount);
 
-            _animator.ResetTrigger(hitTriggerName);
-            _animator.SetTrigger(hitTriggerName);
-
-            if (_flashCoroutine != null)
+            if (currentHitPoints <= 0)
             {
-                StopCoroutine(_flashCoroutine);
-                RestoreOriginalColors();
+                currentHitPoints = 0;
+                HandleDeath();
             }
-            _flashCoroutine = StartCoroutine(FlashRoutine());
+            else
+            {
+                if (!_animator || string.IsNullOrEmpty(hitTriggerName)) return;
+
+                _animator.ResetTrigger(hitTriggerName);
+                _animator.SetTrigger(hitTriggerName);
+
+                if (_flashCoroutine != null)
+                {
+                    StopCoroutine(_flashCoroutine);
+                    RestoreOriginalColors();
+                }
+                _flashCoroutine = StartCoroutine(FlashRoutine());
+            }
         }
     }
     
