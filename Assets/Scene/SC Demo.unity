@@ -79416,7 +79416,7 @@ PrefabInstance:
     - target: {fileID: 4824129319221912511, guid: 550140d01ec42764e807c1b14f9ad95c,
         type: 3}
       propertyPath: phaseTwoThreshold
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4824129319221912511, guid: 550140d01ec42764e807c1b14f9ad95c,
         type: 3}
